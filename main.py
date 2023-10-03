@@ -5,17 +5,18 @@ from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 
 
-cars_dataSet = pd.read_csv('C:/Users/oali2/OneDrive/Documents/growIntern tasks/car price prediction/archive/CarPrices.csv')
+cars_dataSet = pd.read_csv(
+    'C:/Users/oali2/OneDrive/Documents/growIntern tasks/car price prediction/archive/CarPrices.csv')
 
 
-
-cars_dataSet.replace({'fueltype' : {'gas' : 0 , 'diesel' : 1}}, inplace=True)
+cars_dataSet.replace({'fueltype': {'gas': 0, 'diesel': 1}}, inplace=True)
 cars_dataSet.replace({'enginelocation': {'front': 0, 'rear': 1}}, inplace=True)
-cars_dataSet.replace({'drivewheel': {'fwd': 0, 'rwd': 1 , '4wd' : 2}}, inplace=True)
+cars_dataSet.replace(
+    {'drivewheel': {'fwd': 0, 'rwd': 1, '4wd': 2}}, inplace=True)
 cars_dataSet.replace(
     {'aspiration': {'std': 0, 'turbo': 1}}, inplace=True)
-cars_dataSet.replace({'cylindernumber': {'two': 2, 'three': 3 , 'four' : 4 , 'five' : 5 , 'six' : 6 , 'eight' : 8 , 'twelve' : 12}}, inplace=True)
-
+cars_dataSet.replace({'cylindernumber': {'two': 2, 'three': 3, 'four': 4,
+                     'five': 5, 'six': 6, 'eight': 8, 'twelve': 12}}, inplace=True)
 
 
 x = cars_dataSet.drop(
@@ -23,12 +24,13 @@ x = cars_dataSet.drop(
 
 y = cars_dataSet['price']
 
-x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.8,random_state=2)
+x_train, x_test, y_train, y_test = train_test_split(
+    x, y, test_size=0.8, random_state=2)
 # print(x_train)
 
 
 model = LinearRegression()
-model.fit(x_train,y_train)
+model.fit(x_train, y_train)
 
 
 prediction = model.predict(x_test)
@@ -36,11 +38,11 @@ prediction = model.predict(x_test)
 
 print(prediction)
 
-mse = metrics.r2_score(y_test,prediction)
+mse = metrics.r2_score(y_test, prediction)
 print("mse : ", mse)
 
-plt.scatter(y_test,prediction)
-plt.xlabel("actual price")
+plt.scatter(y_test, prediction)
+plt.ylabel("actual price")
 plt.xlabel("predicted price")
 plt.title('comp')
 plt.show()
